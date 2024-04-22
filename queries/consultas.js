@@ -40,9 +40,17 @@ const campoSelectQuery = (guitarra, campo) => {
   return guitarra;
 };
 
+//paginar 
 const paginadoQuery=(hateOasQuery, page, limite)=>{
 const offset=(page-1)* limite;
 return guitarras.slice(offset,offset+limite)
 }
 
-export { filtroByBodyQuery, filtroByOrderQuery, hateOasQuery, guitarra, campoSelectQuery, paginadoQuery };
+//categorías 
+const categoriasQuery=(categoria)=>{
+    const results=guitarras.filter(guitarra=>guitarra.category===categoria)
+    return results
+}
+
+
+export { filtroByBodyQuery, filtroByOrderQuery, hateOasQuery, guitarra, campoSelectQuery, paginadoQuery, categoriasQuery };

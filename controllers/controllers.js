@@ -5,6 +5,7 @@ import {
   guitarra,
   campoSelectQuery,
   paginadoQuery,
+  categoriasQuery
 } from "../queries/consultas.js";
 const filtroByBody = (req, res) => {
   const { cuerpo } = req.params;
@@ -49,4 +50,13 @@ const paginado = (req, res) => {
   res.send(result);
 };
 
-export { filtroByBody, filtroByOrder, hateOas, campoSelect, paginado };
+const categoria=(req,res)=>{
+    const categoria= req.params.categoria
+    const resultado=categoriasQuery(categoria);
+    res.send({
+        cantidad:resultado.length,
+        guitarras: resultado
+    })
+}
+
+export { filtroByBody, filtroByOrder, hateOas, campoSelect, paginado, categoria };
