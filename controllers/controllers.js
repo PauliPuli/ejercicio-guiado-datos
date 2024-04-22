@@ -4,6 +4,7 @@ import {
   hateOasQuery,
   guitarra,
   campoSelectQuery,
+  paginadoQuery,
 } from "../queries/consultas.js";
 const filtroByBody = (req, res) => {
   const { cuerpo } = req.params;
@@ -25,17 +26,27 @@ const hateOas = (req, res) => {
 };
 
 const campoSelect = (req, res) => {
-  const {id} = req.params;
-  const {campo} = req.query;
+  const { id } = req.params;
+  const { campo } = req.query;
   if (campo)
     return res.send({
       guitarra: campoSelectQuery(guitarra(id), campo.split(",")),
     });
-    guitarra(id)
+  guitarra(id)
     ? res.send({ guitarra: guitarra(id) })
     : res.status(404).send({ error: "guitarra not found" });
 };
 
+//paginado
+const paginado = (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limite = parseInt(req.query.page) || 10;
+  if (page < 1)
+    return res.status(400).send({ error: "La página debe ser mayor que 0" });
+  if (limite < 1)
+    return res.status(400).send({ error: "El límite debe ser mayor a 0" });
+  const result = paginadoQuery(hateOasQuery, page, limite);
+  res.send(result);
+};
 
-//paginado 
-export { filtroByBody, filtroByOrder, hateOas, campoSelect };
+export { filtroByBody, filtroByOrder, hateOas, campoSelect, paginado };
