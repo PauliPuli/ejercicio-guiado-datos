@@ -42,7 +42,7 @@ const campoSelectQuery = (guitarra, campo) => {
 
 const paginadoQuery=(hateOasQuery, page, limite)=>{
 const offset=(page-1)* limite;
-return guitarras.slide(offset,offset+limite)
+return guitarras.slice(offset,offset+limite)
 }
 
 export { filtroByBodyQuery, filtroByOrderQuery, hateOasQuery, guitarra, campoSelectQuery, paginadoQuery };

@@ -40,7 +40,7 @@ const campoSelect = (req, res) => {
 //paginado
 const paginado = (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const limite = parseInt(req.query.page) || 10;
+  const limite = parseInt(req.query.limite) || 10;
   if (page < 1)
     return res.status(400).send({ error: "La página debe ser mayor que 0" });
   if (limite < 1)
